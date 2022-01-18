@@ -290,7 +290,7 @@
           <div class="table-title">
             <div class="row">
               <div class="col-sm-6">
-                <h2>จัดการข้อมูลผู้ใช้งาน</h2>
+                <h2>เพิ่ม ลบ แก้ไข ข้อมูล</h2>
               </div>
               <div class="col-sm-6">
                 <a
@@ -474,6 +474,14 @@
                   <option value="{{status.statusid}}" *ngFor="let status of statuses">{{status.status}}</option>
                   
                  </select>
+                </div>
+                <!-- เพิ่มแท็กให้เลือกภาพ -->
+                <div class="form-group">
+                  <label>เลือกรูปภาพ</label>
+                  <input type="file" class="form-control" name="picture"
+                  (change)="onFlieSelect($event)">
+                  
+
                 </div>
                 <div class="form-group">
                   <input type="submit" value="บันทึก" class="btn btn-primary" />

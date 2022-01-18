@@ -20,9 +20,10 @@ export class UsersComponent implements OnInit {
     username: '',
     password: '',
     statusid: '',
+    picture: ''
   };
   public userid: string = '';
-
+  // public file: File = {} ;
   constructor(
     private userService: UserService,
     private statusService: StatusService
@@ -41,7 +42,7 @@ export class UsersComponent implements OnInit {
   }
   addUser(): void {
     $('#addEmployeeModal').modal('hide');
-    // console.log(this.model);
+    console.log(this.model);
     // เรียกใช้ userService เพื่อ post ข้อมูล
     this.userService.postUser(this.model).subscribe((result) => {
       console.log(result);
@@ -50,7 +51,7 @@ export class UsersComponent implements OnInit {
   }
   deleteUser(id: string): void {
     this.userid = id;
-    // console.log(id);
+    console.log(id);
   }
   confirmDelete(): void {
     $('#deleteEmployeeModal').modal('hide');
@@ -72,5 +73,15 @@ export class UsersComponent implements OnInit {
       console.log(result);
       this.ngOnInit();
     });
+  }
+  onFlieSelect(event: any): void{
+    // console.log(event.target.files[0].type);
+    // ตรวจสอบว่ามีการเลือกไฟล์หรือยัง
+    if(event.target.files.length > 0){
+      // this.file = event.target.files[0];
+      // this.model.picture = this.file.name;
+      this.model.picture = event.target.files[0].name;
+    }
+   
   }
 }
