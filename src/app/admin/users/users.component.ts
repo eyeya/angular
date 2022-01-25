@@ -13,6 +13,7 @@ export class UsersComponent implements OnInit {
   public items: any;
   public statuses: any;
   model = {
+    userid:"",
     name: "",
     gender: "",
     address: "",
@@ -84,7 +85,19 @@ export class UsersComponent implements OnInit {
     $("#editEmployeeModal").modal("hide");
     // console.log(this.model);
     // เรียกใช้ userservice เพื่อแก้ไขข้อมูล
-    this.userService.putUser(this.model).subscribe((result) => {
+    this.userService.putUser(this.model)
+    .subscribe((result) => {
+      // upload
+      if(this.hasFile){
+        //ถ้ามีไฟล์รูปภาพ
+        this.formData.append('picture', this.file);
+        this.formData.append('userid', this.model.userid);
+        // เรียกใช้ service ในการ upload
+        this.uploadService.uploadUserPictureFile(this.formData)
+        .subscribe(response =>{
+          console.log(response);
+        });
+      }
       console.log(result);
       this.ngOnInit();
     });
@@ -95,7 +108,7 @@ export class UsersComponent implements OnInit {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
       this.model.picture = this.file.name;
-      // this.hasFile = true;
+      this.hasFile = true;
       this.model.picture = event.target.files[0].name;
     }
   }
