@@ -317,25 +317,31 @@
             <tbody>
               <tr></tr>
 
-              <tr *ngFor="let items of items">
+              <tr *ngFor="let item of items">
                 <td>
                   <img
-                    src="http://localhost/angular64API/images/{{items.picture}}"
+                    src="http://localhost/angular64API/images/{{item.picture}}"
                     width="100px"
                     height="110px"
-                  />
+                    *ngIf="item.picture !='' ">
+                    <img
+                    src="http://localhost/angular64API/images/noimage.png"
+                    width="100px"
+                    height="110px"
+                    *ngIf="item.picture =='' ">
+                  
                 </td>
-                <td>{{ items.name }}</td>
-                <td>{{ items.gender }}</td>
-                <td>{{ items.address }}</td>
-                <td>{{ items.telephone }}</td>
-                <td>{{ items.email }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.gender }}</td>
+                <td>{{ item.address }}</td>
+                <td>{{ item.telephone }}</td>
+                <td>{{ item.email }}</td>
                 <td>
                   <a
                     href="#editEmployeeModal"
                     class="edit"
                     data-bs-toggle="modal"
-                    (click)="editUser(items)"
+                    (click)="editUser(item)"
                     ><i
                       class="material-icons"
                       data-toggle="tooltip"
@@ -347,7 +353,7 @@
                     href="#deleteEmployeeModal"
                     class="delete"
                     data-bs-toggle="modal"
-                    (click)="deleteUser(items.userid)"
+                    (click)="deleteUser(item.userid, item.picture)"
                     ><i
                       class="material-icons"
                       data-toggle="tooltip"
@@ -634,7 +640,9 @@
                <div class="form-group">
                  <label>รูปภาพเดิม</label>
                  <img src="http://localhost/angular64API/images/{{model.picture}}" 
-                 width="60px" height="70px">
+                 width="60px" height="70px" *ngIf="model.picture !=''">
+                 <img src="http://localhost/angular64API/images/noimage.png" 
+                 width="60px" height="70px" *ngIf="model.picture ==''">
 
                </div>
                

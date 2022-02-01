@@ -25,6 +25,7 @@ export class UsersComponent implements OnInit {
     picture: "",
   };
   public userid: string = "";
+  public userpicture: string= "";
   file!: File;
   hasFile: boolean | undefined; //ตรวจสอบการเลือกไฟล์ว่าใช่หรือไม่
   formData = new FormData(); // ส่งค่าไปฟอร์ม
@@ -65,15 +66,16 @@ export class UsersComponent implements OnInit {
       this.ngOnInit();
     });
   }
-  deleteUser(id: string): void {
+  deleteUser(id: string, picture: string): void {
     this.userid = id;
+    this.userpicture = picture;
     console.log(id);
   }
   confirmDelete(): void {
     $("#deleteEmployeeModal").modal("hide");
     console.log(this.userid);
     // เรียกใช้ userservice เพื่อลบข้อมูล
-    this.userService.deleteUser(this.userid).subscribe((result) => {
+    this.userService.deleteUser(this.userid, this.userpicture).subscribe((result) => {
       console.log(result);
       this.ngOnInit();
     });
